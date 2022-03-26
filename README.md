@@ -1,2 +1,2 @@
 # randobot_code
-This is some bad code, that needs to be fixed
+This is some unoptimized code, that needs to be fixed
