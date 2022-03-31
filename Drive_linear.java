@@ -15,7 +15,7 @@ class Randobot {
     public DcMotor Arm = null;
     public DcMotor Spinner = null;
 
-    public static double Claw_Home = 0.5;
+    public static double Claw_Home = 0;
     //public static double Claw_Min = 0.0;
     //public static double Claw_Max = 0.5;
 
@@ -49,7 +49,7 @@ class Randobot {
     }
 }
 
-@TeleOp(name="Drive", group="Drive")
+@TeleOp(name="Randobot: Drive", group="Randobot")
 
 public class Drive_linear extends LinearOpMode{
     Randobot robot = new Randobot();
@@ -59,9 +59,9 @@ public class Drive_linear extends LinearOpMode{
     double ClawPosition = robot.Claw_Home;
     double Armpos = 0.0;
     double Spinpos = 0.0;
-    final double Claw_Speed = 0.05;
-    final double Arm_Speed = 0.05;
-    final double Spin_Speed = 0.2;
+    final double Claw_Speed = 0.1;
+    final double Arm_Speed = 0.1;
+    final double Spin_Speed = 1;
 
     @Override
     public void runOpMode(){
@@ -80,6 +80,8 @@ public class Drive_linear extends LinearOpMode{
                 ClawPosition += Claw_Speed;
             else if (gamepad1.y)
                 ClawPosition -= Claw_Speed;
+            else if ((gamepad1.x || gamepad1.b) && (Armpos != 0))
+                Armpos = 0.0;
             else if(gamepad1.x)
                 Armpos += Arm_Speed;
             else if (gamepad1.b)
@@ -101,7 +103,7 @@ public class Drive_linear extends LinearOpMode{
 
             robot.Arm.setPower(Armpos);
 
-            //ClawPosition = Range.clip(ClawPosition, robot.Claw_Min, robot.Claw_Max);
+            ClawPosition = Range.clip(ClawPosition, 0.0, 1.0);
             robot.Claw.setPosition(ClawPosition);
 
             //telemetry.addData("x","%.2f",x);
