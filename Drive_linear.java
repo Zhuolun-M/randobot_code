@@ -43,7 +43,7 @@ class Randobot {
 
         Left.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         Right.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        Arm.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        Arm.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         Spinner.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
     }
@@ -91,7 +91,7 @@ public class Drive_linear extends LinearOpMode{
                 robot.Right.setPower(-rx);
             }
             else if ((gamepad1.right_bumper) && (Spinpos > 0))
-              Spinpos -= Spin_Speed;
+                Spinpos -= Spin_Speed;
             else if (gamepad1.right_bumper)
                 Spinpos += Spin_Speed;
             else {
